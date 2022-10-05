@@ -5,13 +5,27 @@ from sage.all_cmdline import *   # import sage library
 
 _sage_const_8 = Integer(8); _sage_const_65 = Integer(65); _sage_const_2 = Integer(2); _sage_const_1 = Integer(1); _sage_const_0 = Integer(0); _sage_const_100 = Integer(100)
 from sage.crypto.sbox import SBox
+from sage.crypto.boolean_function import BooleanFunction
 import itertools
+import random
+
+class bcolors:
+    HEADER = '\033[95m'
+    OKBLUE = '\033[94m'
+    OKCYAN = '\033[96m'
+    OKGREEN = '\033[92m'
+    WARNING = '\033[93m'
+    FAIL = '\033[91m'
+    ENDC = '\033[0m'
+    BOLD = '\033[1m'
+    UNDERLINE = '\033[4m'
+
 n = _sage_const_8 
 c = _sage_const_65 
 gf = GF(_sage_const_2 **(n-_sage_const_1 ))
 
 binaryToInt = lambda binaryVector: int("".join(str(x) for x in binaryVector), _sage_const_2 )
-get_bin = lambda x, n: list(map(lambda x: int(x), list(format(x, 'b').zfill(n))))
+getBin = lambda x, n: list(map(lambda x: int(x), list(format(x, 'b').zfill(n))))
 
 def T(x1, x2, c, n):
 	gf_x1 = gf.fetch_int(binaryToInt(x1))
@@ -26,19 +40,23 @@ def U(f, x2, x1):
 def F(x):
 	x1 = x[:-_sage_const_1 ]
 	x2 = x[-_sage_const_1 ]
-	T_res = get_bin(T(x1, x2, c, n).integer_representation(), n)
-	U_res = [U(lambda x: sum(x)%_sage_const_2 , x2, T_res)]
+	T_res = getBin(T(x1, x2, c, n).integer_representation(), n-_sage_const_1 )
+	U_res = [U(randBoolFunc, x2, T_res)]
 	return T_res + U_res
+
+randBoolFunc = BooleanFunction(list(map(lambda x: random.randint(_sage_const_0 , _sage_const_1 ), range(_sage_const_0 ,_sage_const_2 **(n-_sage_const_1 )))))
 
 combinations = [list(i) for i in itertools.product([_sage_const_0 , _sage_const_1 ], repeat=n)]
 
-for i in range(_sage_const_1 ,_sage_const_100 ):
+print(bcolors.OKGREEN + "f degree: {}".format(randBoolFunc.algebraic_degree()) + bcolors.ENDC)
+for i in range(_sage_const_2 ,_sage_const_100 ):
+	print(bcolors.HEADER + "\nIteration: {}".format(i) + bcolors.ENDC)
 	c = i
 	F_results = list(map(lambda x: F(x), combinations))
 	s = map(lambda x: binaryToInt(x), F_results)
 	sbox = SBox(s)
 	print("Fixed points: ", sbox.fixed_points())
-	print("Min degree: ", sbox.min_degree())
+	print(bcolors.OKBLUE + "Min degree: " + bcolors.ENDC, sbox.min_degree())
 	print("Polynimials lenght: ", len(sbox.polynomials()))
 	print("sigma: ", sbox.differential_uniformity())
 	print("c = ", c)

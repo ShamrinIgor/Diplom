@@ -1,0 +1,82 @@
+f degree: 6
+
+Iteration: 2
+Fixed points:  [2, 37]
+Min degree:  6
+Polynimials lenght:  19
+sigma:  6
+c =  2
+tr(c):  0
+tr(c^-1):  1
+
+Iteration: 3
+Fixed points:  [2]
+Min degree:  6
+Polynimials lenght:  19
+sigma:  6
+c =  3
+tr(c):  1
+tr(c^-1):  0
+
+Iteration: 4
+Fixed points:  [2, 5]
+Min degree:  6
+Polynimials lenght:  19
+sigma:  6
+c =  4
+tr(c):  0
+tr(c^-1):  1
+
+Iteration: 5
+Fixed points:  [2]
+Min degree:  6
+Polynimials lenght:  19
+sigma:  6
+c =  5
+tr(c):  1
+tr(c^-1):  0
+
+Iteration: 6
+Fixed points:  [2]
+Min degree:  6
+Polynimials lenght:  19
+sigma:  6
+c =  6
+tr(c):  0
+tr(c^-1):  1
+
+Iteration: 7
+Fixed points:  [2]
+Min degree:  6
+Polynimials lenght:  19
+sigma:  6
+c =  7
+tr(c):  1
+tr(c^-1):  0
+
+Iteration: 8
+Fixed points:  [2, 73]
+Min degree:  6
+Polynimials lenght:  19
+sigma:  6
+c =  8
+tr(c):  0
+tr(c^-1):  1
+
+Iteration: 9
+Fixed points:  [2]
+Min degree:  6
+Polynimials lenght:  19
+sigma:  6
+c =  9
+tr(c):  1
+tr(c^-1):  0
+
+Iteration: 10
+Fixed points:  [2]
+Min degree:  6
+Polynimials lenght:  19
+sigma:  6
+c =  10
+tr(c):  0
+tr(c^-1):  1
