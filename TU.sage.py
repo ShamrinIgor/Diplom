@@ -49,17 +49,29 @@ randBoolFunc = BooleanFunction(list(map(lambda x: random.randint(_sage_const_0 ,
 combinations = [list(i) for i in itertools.product([_sage_const_0 , _sage_const_1 ], repeat=n)]
 
 print(bcolors.OKGREEN + "f degree: {}".format(randBoolFunc.algebraic_degree()) + bcolors.ENDC)
-for i in range(_sage_const_2 ,_sage_const_100 ):
-	print(bcolors.HEADER + "\nIteration: {}".format(i) + bcolors.ENDC)
-	c = i
-	F_results = list(map(lambda x: F(x), combinations))
-	s = map(lambda x: binaryToInt(x), F_results)
-	sbox = SBox(s)
-	print("Fixed points: ", sbox.fixed_points())
-	print(bcolors.OKBLUE + "Min degree: " + bcolors.ENDC, sbox.min_degree())
-	print("Polynimials lenght: ", len(sbox.polynomials()))
-	print("sigma: ", sbox.differential_uniformity())
-	print("c = ", c)
-	print("tr(c): ", gf.fetch_int(c).trace())
-	print("tr(c^-1): ", (gf.fetch_int(c)**(-_sage_const_1 )).trace())
+
+def createSBoxes():
+	for i in range(_sage_const_2 ,_sage_const_100 ):
+		print(bcolors.HEADER + "\nIteration: {}".format(i) + bcolors.ENDC)
+		c = i
+		F_results = list(map(lambda x: F(x), combinations))
+		s = map(lambda x: binaryToInt(x), F_results)
+		sbox = SBox(s)
+		print("Fixed points: ", sbox.fixed_points())
+		print(bcolors.OKBLUE + "Min degree: " + bcolors.ENDC, sbox.min_degree())
+		print("Polynimials lenght: ", len(sbox.polynomials()))
+		print("sigma: ", sbox.differential_uniformity())
+		print("c = ", c)
+		print("tr(c): ", gf.fetch_int(c).trace())
+		print("tr(c^-1): ", (gf.fetch_int(c)**(-_sage_const_1 )).trace())
+
+def checkC():
+	for i in range(_sage_const_2 ,_sage_const_2 **n - _sage_const_1 ):
+		T_results = list(map(lambda x: getBin(T(x[:-_sage_const_1 ], x[-_sage_const_1 ], c, n).integer_representation(), n-_sage_const_1 ), combinations))
+		#print(T_results)
+		print("\n\n\n")
+		print("T_res len = ")
+		print(len(list(set(tuple(i) for i in T_results))))
+
+checkC()
 

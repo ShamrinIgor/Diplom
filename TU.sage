@@ -43,16 +43,28 @@ randBoolFunc = BooleanFunction(list(map(lambda x: random.randint(0, 1), range(0,
 combinations = [list(i) for i in itertools.product([0, 1], repeat=n)]
 
 print(bcolors.OKGREEN + "f degree: {}".format(randBoolFunc.algebraic_degree()) + bcolors.ENDC)
-for i in range(2,100):
-	print(bcolors.HEADER + "\nIteration: {}".format(i) + bcolors.ENDC)
-	c = i
-	F_results = list(map(lambda x: F(x), combinations))
-	s = map(lambda x: binaryToInt(x), F_results)
-	sbox = SBox(s)
-	print("Fixed points: ", sbox.fixed_points())
-	print(bcolors.OKBLUE + "Min degree: " + bcolors.ENDC, sbox.min_degree())
-	print("Polynimials lenght: ", len(sbox.polynomials()))
-	print("sigma: ", sbox.differential_uniformity())
-	print("c = ", c)
-	print("tr(c): ", gf.fetch_int(c).trace())
-	print("tr(c^-1): ", (gf.fetch_int(c)^(-1)).trace())
+
+def createSBoxes():
+	for i in range(2,100):
+		print(bcolors.HEADER + "\nIteration: {}".format(i) + bcolors.ENDC)
+		c = i
+		F_results = list(map(lambda x: F(x), combinations))
+		s = map(lambda x: binaryToInt(x), F_results)
+		sbox = SBox(s)
+		я тоprint("Fixed points: ", sbox.fixed_points())
+		print(bcolors.OKBLUE + "Min degree: " + bcolors.ENDC, sbox.min_degree())
+		print("Polynimials lenght: ", len(sbox.polynomials()))
+		print("sigma: ", sbox.differential_uniformity())
+		print("c = ", c)
+		print("tr(c): ", gf.fetch_int(c).trace())
+		print("tr(c^-1): ", (gf.fetch_int(c)^(-1)).trace())
+
+def checkC():
+	for i in range(2,2^n - 1):
+		T_results = list(map(lambda x: getBin(T(x[:-1], x[-1], c, n).integer_representation(), n-1), combinations))
+		#print(T_results)
+		print("\n\n")
+		print("T_res len = ")
+		print(len(list(set(tuple(i) for i in T_results))))
+
+checkC()
